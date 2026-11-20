@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Administration du catalogue CinéTrack." />
+  <title>CinéTrack — Administration</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="../css/admin.css" />
+</head>
+<body>
+  <main class="admin-shell">
+    <header class="page-header">
+      <a class="brand" href="../index.html" aria-label="CinéTrack, accueil">
+        <i class="fa-solid fa-clapperboard" aria-hidden="true"></i>
+        <span>Ciné<span class="brand-accent">Track</span></span>
+      </a>
+      <a class="back-link" href="../index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Retour au catalogue</a>
+    </header>
+
+    <div class="page-heading">
+      <h1>Administration du catalogue</h1>
+    </div>
+
+    <p id="error" class="notice is-hidden" role="status" aria-live="polite"></p>
+
+    <section class="panel form-panel">
+      <div class="section-heading">
+        <div>
+          <h2 id="form-title">Ajouter un contenu</h2>
+        </div>
+      </div>
+
+      <form id="content-form" novalidate>
+        <input type="hidden" id="content-id" />
+        <div class="form-grid">
+          <div class="field">
+            <label for="title">Titre <span aria-hidden="true">*</span></label>
+            <input type="text" id="title" name="title" autocomplete="off" aria-describedby="title-error" />
+            <small class="field-error" id="title-error"></small>
+          </div>
+
+          <div class="field">
+            <label for="type">Type <span aria-hidden="true">*</span></label>
+            <select id="type" name="type" aria-describedby="type-error">
+              <option value="movie">Film</option>
+              <option value="series">Série</option>
+            </select>
+            <small class="field-error" id="type-error"></small>
+          </div>
+
+          <div class="field">
+            <label for="releaseYear">Année de sortie <span aria-hidden="true">*</span></label>
+            <input type="number" id="releaseYear" name="releaseYear" min="1900" aria-describedby="releaseYear-error" />
+            <small class="field-error" id="releaseYear-error"></small>
+          </div>
+
+          <div class="field field-wide">
+            <label for="poster">URL de l’image <span aria-hidden="true">*</span></label>
+            <input type="url" id="poster" name="image" placeholder="https://…" aria-describedby="poster-error" />
+            <small class="field-error" id="poster-error"></small>
+            <img id="image-preview" class="image-preview is-hidden" alt="Aperçu de l’image" />
+          </div>
+
+          <div class="field" id="duration-field">
+            <label for="duration">Durée (minutes) <span aria-hidden="true">*</span></label>
+            <input type="number" id="duration" name="duration" min="1" aria-describedby="duration-error" />
+            <small class="field-error" id="duration-error"></small>
+          </div>
+
+          <div class="field is-hidden" id="seasons-field">
+            <label for="seasons">Nombre de saisons <span aria-hidden="true">*</span></label>
+            <input type="number" id="seasons" name="seasons" min="1" aria-describedby="seasons-error" />
+            <small class="field-error" id="seasons-error"></small>
+          </div>
+
+          <div class="field">
+            <label for="genres">Genres</label>
+            <input type="text" id="genres" name="genres" placeholder="Science-fiction, Drame" />
+          </div>
+
+          <div class="field">
+            <label for="directors">Réalisateurs</label>
+            <input type="text" id="directors" name="directors" placeholder="Noms séparés par des virgules" />
+          </div>
+
+          <div class="field field-wide">
+            <label for="productionCountries">Pays de production</label>
+            <input type="text" id="productionCountries" name="productionCountries" placeholder="France, États-Unis" />
+          </div>
+
+          <div class="field field-wide">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" id="submit-btn" class="button button-primary">Ajouter</button>
+          <button type="button" id="cancel-btn" class="button button-secondary is-hidden">Annuler</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel list-panel">
+      <div class="section-heading">
+        <div>
+          <h2>Catalogue <span class="count">(<span id="contents-count">0</span>)</span></h2>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Titre</th>
+              <th scope="col">Type</th>
+              <th scope="col">Année</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-contents-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="./admin.js"></script>
+</body>
+</html>
