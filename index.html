@@ -43,6 +43,11 @@
 
             </a>
 
+            <a href="./js/Admin.html"
+                class="rounded-lg border border-gray-700 px-4 py-2 text-sm font-semibold text-white hover:border-red-500 hover:text-red-400 transition">
+                Admin
+            </a>
+
         </div>
 
     </header>
@@ -53,6 +58,8 @@
 
      <!-- LEFT SIDE: SEARCH + MOVIES -->
 <section class="p-6">
+    <p id="catalog-status" role="status" aria-live="polite"
+        class="hidden mb-5 rounded-lg border border-gray-700 bg-gray-950/80 px-4 py-3 text-sm"></p>
 
     <!-- Search + Filter -->
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3 mb-8">
@@ -94,7 +101,7 @@
     <div id="modal"
         class="hidden fixed inset-0 z-50 bg-black/70 items-center justify-center p-4">
 
-        <div class="bg-gray-900 text-white rounded-xl max-w-2xl w-full p-6 relative">
+        <div class="bg-gray-900 text-white rounded-xl max-w-2xl max-h-[90vh] overflow-y-auto w-full p-6 relative">
 
             <button id="close-modal" type="button"
                 class="absolute top-3 right-3 text-2xl">
@@ -106,10 +113,6 @@
     </div>
 
 </section>
-
-
-
-     
         <aside class="bg-gray-950 border-l border-gray-200 p-4">
 
            <div class="flex items-center justify-between mb-6">
