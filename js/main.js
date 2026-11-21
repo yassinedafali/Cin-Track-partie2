@@ -18,22 +18,23 @@ import {
     openModal,
     initModal
 } from "./modale.js";
+import { setPageStatus } from "./ui.js";
 
 
 // ================= INITIALISATION =================
 
+setPageStatus("Chargement du catalogue…");
 const data = await getData();
+const container = document.getElementById("movies-container");
+const favoritesContainer = document.getElementById("favorites-container");
+const active = document.getElementById("active");
+
+initModal();
 
 if (!data.length) {
-    console.log("Aucun film trouvé");
+    setPageStatus("Aucun contenu n'a pu être chargé.", "error");
 } else {
-
-    const container = document.getElementById("movies-container");
-    const favoritesContainer = document.getElementById("favorites-container");
-    const active = document.getElementById("active");
-
     let currentFilms = data;
-
 
     // ================= PREMIER AFFICHAGE =================
 
@@ -43,7 +44,7 @@ if (!data.length) {
 
     // ================= ACTIVE BUTTON =================
 
-    active.addEventListener("click", () => {
+    active?.addEventListener("click", () => {
 
         active.classList.toggle("text-green-700");
         active.classList.toggle("text-red-700");
@@ -94,7 +95,7 @@ if (!data.length) {
 
     // ================= REMOVE FAVORITE =================
 
-    favoritesContainer.addEventListener("click", e => {
+    favoritesContainer?.addEventListener("click", e => {
 
         const btn = e.target.closest(".remove-favorite");
 
@@ -120,7 +121,5 @@ if (!data.length) {
 
 
     // ================= MODAL =================
-
-    initModal();
 
 }

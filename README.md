@@ -1,94 +1,96 @@
-#  CinéTrack
+# CinéTrack
 
-**Réalisé par : Yassine Dafali**
+**Auteur : Yassine Dafali**
 
-##  Présentation du projet
+CinéTrack est un catalogue web de films et séries réalisé pour pratiquer JavaScript, les modules ES, la manipulation du DOM et les API REST.
 
-CinéTrack est une application web qui permet aux utilisateurs de découvrir des films et des séries à partir d'une API.
+## Fonctionnalités
 
-L'objectif de ce projet est de pratiquer JavaScript, la manipulation du DOM et l'organisation du code avec les modules ES6.
+### Catalogue
 
-##  Fonctionnalités
+- Affichage des films et séries sous forme de cartes.
+- Recherche par titre avec filtrage progressif.
+- Filtrage par type et pagination.
+- Modal de détails avec commentaires, dates et notes.
+- Ajout et retrait de favoris, persistés dans `localStorage`.
+- Commentaires synchronisés avec MockAPI et conservés localement.
 
-- Afficher les films et les séries sous forme de cards.
-- Rechercher un film ou une série par son titre.
-- Filtrer les contenus par type : Films ou Séries.
-- Naviguer entre les pages grâce à la pagination.
-- Afficher les détails d'un film ou d'une série dans une fenêtre Modal.
-- Ajouter et retirer des titres des favoris.
-- Sauvegarder les favoris dans le LocalStorage.
-- Retrouver les favoris après le rechargement de la page.
+### Administration
 
-##  Technologies utilisées
+- Liste des contenus provenant de MockAPI.
+- Ajout avec `POST`, modification avec `PUT` et suppression confirmée avec `DELETE`.
+- Validation des champs et prévisualisation de l'image.
+- Les genres, réalisateurs et pays de production sont saisis sous forme de listes séparées par des virgules.
 
-- HTML5
-- Tailwind CSS
-- JavaScript (ES6)
-- Fetch API
-- Async / Await
-- LocalStorage
-- Modules JavaScript (Import / Export)
+## Technologies
 
-##  Organisation du projet
+- HTML5 et CSS (Tailwind CSS pour le catalogue, feuille CSS dédiée à Admin).
+- JavaScript ES modules, Fetch API, `async`/`await`.
+- MockAPI pour les contenus et commentaires.
+- `localStorage` pour les favoris et une copie locale des commentaires.
+- Font Awesome pour les icônes Admin.
+
+## Architecture
 
 ```text
-CinéTrack/
-│
+.
 ├── index.html
-│
+├── css/
+│   └── admin.css
 ├── img/
-│
-├── js/
-│   ├── store.js
-│   ├── render.js
-│   ├── filter.js
-│   ├── Favorites.js
-│   ├── modale.js
-│   └── main.js
-│
-└── README.md
+└── js/
+    ├── Admin.html
+    ├── admin.js
+    ├── api.js
+    ├── comments.js
+    ├── config.js
+    ├── Favorites.js
+    ├── filter.js
+    ├── main.js
+    ├── modale.js
+    ├── render.js
+    ├── request.js
+    ├── store.js
+    ├── ui.js
+    └── validation.js
 ```
 
-##  API utilisée
+- `config.js` contient les routes et l'URL racine MockAPI.
+- `request.js` centralise les appels HTTP ; `api.js` expose les fonctions métier.
+- `store.js` charge les contenus et contient l'import idempotent des 29 fiches de la Partie 1.
+- `main.js`, `filter.js`, `render.js` et `Favorites.js` pilotent le catalogue.
+- `modale.js` et `comments.js` affichent et synchronisent les commentaires.
+- `admin.js`, `validation.js` et `ui.js` gèrent l'administration, la validation et les messages.
 
-Les données des films et des séries sont récupérées depuis cette API :
+## Configuration MockAPI
 
-[ CinetTrack API - GitHub ](https://raw.githubusercontent.com/ouchad97/cinetrack-api/main/cinetrack-data.json)
+La configuration du projet utilise les routes suivantes :
 
-J'utilise `fetch()` avec `async/await` pour récupérer les données et `try/catch` pour gérer les erreurs.
+- Contenus : `https://6afaf139730c1d152f32cdeb.mockapi.io/cinitrack/cinemas`
+- Commentaires : `https://6afaf139730c1d152f32cdeb.mockapi.io/cinitrack/comments`
 
-##  Installation et lancement
+Le schéma des contenus comprend `id`, `title`, `image`, `description`, `type`, `releaseYear`, ainsi que `duration` pour un film ou `seasons` pour une série, et les tableaux `genres`, `directors`, `productionCountries`.
 
-1. Cloner le projet :
+Le schéma des commentaires comprend `id`, `contentId`, `author`, `text`, `rating` et `createdAt`.
+
+## Installation et lancement
 
 ```bash
-git clone URL_DU_DEPOT
+git clone https://github.com/yassinedafali/Cin-Track-partie2.git
+cd Cin-Track-partie2
 ```
 
-2. Entrer dans le dossier :
+Ouvrir le dossier dans VS Code et lancer `index.html` avec Live Server. La page Admin est accessible depuis le lien **Admin** dans l'en-tête.
 
-```bash
-cd CinéTrack
-```
+## Vérification manuelle
 
-3. Ouvrir le projet avec VS Code.
+1. Vérifier que le catalogue charge les contenus, puis essayer la recherche, les filtres, la pagination, les favoris et la modal.
+2. Dans Admin, ajouter un film puis une série, modifier un contenu, annuler une modification, puis supprimer un contenu de test après confirmation.
+3. Dans la modal, ajouter un commentaire et vérifier sa présence après rechargement.
 
-4. Lancer `index.html` avec l'extension **Live Server**.
+## Liens
 
-##  Objectif pédagogique
+- Dépôt GitHub : [Cin-Track-partie2](https://github.com/yassinedafali/Cin-Track-partie2)
+- API MockAPI : configurée dans [`js/config.js`](js/config.js)
 
-Ce projet m'a permis de pratiquer plusieurs notions JavaScript :
-
-- La manipulation du DOM.
-- Les événements avec `addEventListener`.
-- Les méthodes `map()`, `filter()`, `find()` et `reduce()`.
-- Les fonctions asynchrones.
-- La gestion des données avec LocalStorage.
-- L'organisation du code en plusieurs modules.
-- La gestion des événements avec `stopPropagation()`.
-
-##  Auteur
-
-**Yassine Dafali**
-
-Projet réalisé dans le cadre de ma formation à YouCode.
+**Projet réalisé par Yassine Dafali dans le cadre de la formation YouCode.**
